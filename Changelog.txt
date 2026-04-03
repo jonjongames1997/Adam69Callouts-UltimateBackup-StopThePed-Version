@@ -1,0 +1,226 @@
+﻿Changelog:
+
+[April 2026]
+
+- Added 4 new callouts
+- Minor Bug Fixes
+- 
+
+Note: Lost Dog callout has returned. May expect bugs.
+
+[March 18, 2026]
+
+- Updated LSPDFR API and RAGEPluginHook references to latest version
+- Added 2 new callouts ["Traffic Light Out" and "Spectrum Alert" - Florida Based Callout]
+- Minor Bug Fixes
+- Minor Adjustments
+- Misc Improvements
+- Refactored Drugs Found callout
+
+[March 12, 2026] - Update Release
+
+v0.4.5:
+
+- Updated RagePluginHook Reference to latest version
+- Fixed recurring `Rage.PedInventory` invalid exceptions by adding centralized, defensive helpers to safely access ped inventory and weapons (`SafeInventory`) and by replacing direct `Ped.Inventory` access across callouts.
+- Updated callouts to use safe inventory access and stronger entity checks (`null`, `Exists()`, `IsValid()`):
+  - `KnifeAttack`
+  - `OfficerDown`
+  - `BicyclePursuit`
+  - `SuspiciousPerson`
+  - `DerangedDrunkenFeller`
+  - `PersonCarryingAConcealedWeapon`
+  - (Additional callouts audited for direct inventory usage and hardening)
+- Improved overall entity lifecycle handling (more consistent use of `Dismiss()`, `Delete()`, and blip cleanup) to reduce memory leaks and dangling references.
+- Minor logging improvements and additional guarded try/catch blocks to surface useful diagnostics only when debug logging is enabled.
+- Miscellaneous small bug fixes and stability improvements.
+- Added 2 new callouts: 'LSIAAirportIncident' - Multiple Scenarios and 'Illegal Hunting [Blaine County]'
+ 
+Files updated in this release:
+- `Adam69Callouts.dll` (build)
+- `Adam69Callouts.pdb` (build)
+- New helper: `Adam69Callouts.Common.SafeInventory.cs`
+- Callout source updates: `Callouts\KnifeAttack.cs`, `Callouts\OfficerDown.cs`, `Callouts\BicyclePursuit.cs`, `Callouts\SuspiciousPerson.cs`, `Callouts\DerangedDrunkenFeller.cs`, `Callouts\PersonCarryingAConcealedWeapon.cs`, and others audited.
+
+
+[December 2025]
+
+v0.4.4:
+
+- Updated LSPDFR and RAGEPluginHookSDK to latest version
+- Fixed more bugs
+- Minor adjustments to "Officer Down" and "Vehicle Blocking Sidewalk" callouts
+- Added a DLC check for "Officer Down" callout whether or not the user has "patch2025_02" DLC pack installed.
+- Hopefully fixed the "Rage.PedInventory is invalid" error
+
+[November 2025]
+
+v0.4.3:
+
+- Removed a null exception error in Suspicious Vehicle callout that was never meant to be there.
+- Fixed an issue where the vehicles, blips and peds were not being cleaned up properly in certain callouts.
+- Added a DLCChecker for the Drugs Found callout to check if you have the required DLC installed. (Requires the Money Fronts DLC installed) // DLC: mp2025_01 
+- Added an option in the config for debug logging. You only enable this if you encounter an issue with the plugin/Asked by my support team.
+- Working on a new callout for Blaine County and Paleto Bay area. (No ETA yet)
+- Airport Callouts are being considered for a future update.
+- Improved entity existence checks to prevent potential crashes.
+
+[September 23, 2025]
+
+v0.4.2:
+
+- Temporarily Removed Blueline dispatch support.
+- Misc fixes to existing callouts.
+- Loitering callout has been fixed.
+- Fixed the "An error occurred while initializing the plugin: String was not recognized as a valid Boolean." error message. (hopefully)
+- Added Policing Redefined Support
+- Deprecated support for Stop The Ped and Ultimate Backup. These plugins are no longer being updated and may cause compatibility issues with future versions of LSPDFR.
+- Disabled Deranged Drunken Feller callout for a complete rewrite
+
+[July 26, 2025]
+
+v0.4.1:
+
+- Added CallAmbulanceKey to the config file for certain callouts that require an ambulance.
+- Ini has been moved from Plugins\LSPDFR to Plugins\LSPDFR\Adams69Callouts\ for better organization.
+- Added a logging logic to the plugin to debug issues and errors if you encounter when using the plugin
+- Added a blip to the drugs in "drugs found" callout
+
+Files need to be updated:
+
+- Adams69Callouts.ini
+- Adams69Callouts.dll
+- Adams69Callouts.pdb
+
+[June 19, 2025]
+
+v0.4.0:
+
+- Updated RAGE SDK and LSPDFR API to latest version
+- Added 1 new police vehicle in Drugs Found callout (You need the mp2025_01 DLC pack installed)
+- Bug Fixes
+- misc changes
+
+v0.3.3.3 or lower is Deprecated and no longer supported. 
+Please update to the latest version for guaranteed compatibility with the latest LSPDFR version and support.
+
+[June 7, 2025]
+
+v0.3.3.3 [Hotfix]:
+
+- Renamed the call key to 'CallAnimalControlKey' for better clarity
+- Misc changes to "Dead Bird On The Road" callout
+- Misc changes to other callouts
+- Enabled the police lighting in "Drugs Found" and "Officer Down" callouts
+- Added an option to enable/disable the mission messages in the config file
+- Added 3 new locations for "Bicycle Blocking Roadway" callout
+- Added 5 new locations for "Suspicious Vehicle" callout
+- Added 3 new locations for "Vehicle Blocking Crosswalk" callout
+- Added 1 new callout "Knife Attack"
+
+[May 6, 2025]
+
+v0.3.1.1:
+
+- Added 1 new callout ("Dead Bird On The Road")
+- Added Console Commands for the callouts - Thanks to Rich's LSPDFR Plugin Template for the guidance.
+- Bug Fixes
+
+[April 10, 2025]
+
+v0.3.0.0:
+
+- Updated RAGE SDK and LSPDFR API to latest version
+- Refactored code for better readability
+- Fixed some grammatical errors
+- Refactored version checker for more stability.
+- Refactored some callout logic for better performance
+
+v0.2.9.1:
+- Fixed an issue with the version checker not reading the correct version correctly.
+- Fixed some minor errors
+
+v0.2.9.0:
+
+- Refactored code for better readability
+- Fixed some grammatical errors
+- Refactored version checker for more stability.
+- Refactored some callout logic for better performance
+- Fixed the issue where the Deranged Drunken feller callout will instant code 4. Error was on my end LMFAO.
+
+v0.2.8.2:
+
+- Forgot to add a route to the officer down callout
+- misc fixes
+- Removed an unused variable in the code that was never used XD.
+
+Localization support is coming soon. Want to see this callout pack to be translated to your language? Submit your translations 
+to the Jon Jon Games Discord server.
+
+v0.2.8.1:
+
+- Fixed the issue with help messages not correctly being disabled when set to false in the ini
+- Minor code clean up
+- Misc fixes
+
+v0.2.7.0:
+
+- Fixed some grammatical errors
+- Minor adjustments
+- bug fixes
+- Fixed an issue with "Deranged Drunken Feller" callout
+- Removed Distance check from "Bicycle Pursuit" callout
+- Minor ini adjustments
+- Added 2 new audio files for "Officer Down" callout
+- Fixed some errors in "Officer Down" callout
+- Changed the animation for picking up the drugs in "Drugs Found" callout
+
+v0.2.6.3:
+
+- Fixed an error of the instant code 4 issue when accepting "Deranged Drunken Feller" callout.
+- Added the missing callout audio for "Deranged Drunken Feller" callout.
+- Misc fixes and adjustments
+
+v0.2.6.2:
+
+- This update fixes the OIV Texture Install (wrong texture name for Adam69Callouts notifications)
+- Removed Lost Dog Callout permanently
+- ini update
+- Added 1 new callout
+- Added 3 new weapons in "Suspicious Person" callout
+- Fixed an error the audio is not playing the correct custom audio files in "Bicycle Pursuit" callout
+
+v0.2.5.1:
+
+- Added custom callout audio made with ElevenLabs AI and modified with Audacity
+- Added 1 new callout
+- Added a texture install OIV for faster installation
+- Fixed an issue where the version checker checking the wrong version when it's the correct version
+- Added 2 new weapons to "Suspicious Person" callout
+- Added armor to the suspect in "Suspicious Person" callout for a longer gun fight.
+- Added 2 new locations for "Vehicle Blocking Crosswalk" and "Vehicle Blocking Sidewalk" callouts
+
+v0.2.3:
+
+- Fixed the issue with disabling help messages. Thanks to Haze for noticing.
+- Updated LSPDFR API Reference to latest version
+- Removed unused code from the project (I forgot to remove it as I don't use the code anywhere in the project)
+- Fixed the ini not reading the values properly. 
+- Updated credits section
+- Suspicious Person and Loitering callouts will now spawn randomly for now. I'm getting a list of locations for these callouts. 
+- Removed Distance Checker
+- Drugs Found is now considered a beta callout.
+
+v0.1.2:
+
+- Added Version Checker
+
+v0.1.1: 
+
+- Removed the preview notification (Was left there by accident)
+- Removed Attempted Indecent Exposure SFW Callout
+- Updated Ini
+
+v0.1.0:
+
+Initial Release
