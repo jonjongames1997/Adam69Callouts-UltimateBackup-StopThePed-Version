@@ -110,7 +110,7 @@ namespace Adam69Callouts.Callouts
 
             if (Game.IsKeyDown(System.Windows.Forms.Keys.L))
             {
-                PolicingRedefined.API.BackupDispatchAPI.RequestTowServiceBackup();
+                StopThePed.API.Functions.callTowService();
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Tow_Truck_Audio");
             }
 
