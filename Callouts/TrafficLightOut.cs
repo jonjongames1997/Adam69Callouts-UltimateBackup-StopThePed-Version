@@ -151,14 +151,14 @@ namespace Adam69Callouts.Callouts
             if (Game.IsKeyDown(Settings.RequestTowTruck))
             {
                 GameFiber.Sleep(200);
-                PolicingRedefined.API.BackupDispatchAPI.RequestTowServiceBackup();
+                StopThePed.API.Functions.callTowService();
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Tow_Truck_Audio");
             }
 
             if (Game.IsKeyDown(Settings.RequestVehicleInfo))
             {
                 GameFiber.Sleep(200);
-                PolicingRedefined.API.InfoDispatchAPI.RunNearestVehicleThroughDispatch(true);
+                StopThePed.API.Functions.requestDispatchVehiclePlateCheck(true);
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Backup_Audio");
             }
 
