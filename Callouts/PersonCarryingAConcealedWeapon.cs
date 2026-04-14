@@ -88,7 +88,7 @@ namespace Adam69Callouts.Callouts
                         if (counter == 1)
                         {
                             NativeFunction.Natives.TASK_TURN_PED_TO_FACE_ENTITY(suspect, MainPlayer, -1);
-                            PolicingRedefined.API.PedAPI.SetPedAsStopped(suspect);
+                            StopThePed.API.Functions.isPedStopped(suspect);
                             Game.DisplaySubtitle("~b~You~w~: LSPD, freeze, mothertrucker!");
                         }
                         if (counter == 2)
