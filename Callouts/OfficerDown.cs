@@ -216,7 +216,7 @@ namespace Adam69Callouts.Callouts
                                     suspect.Tasks.FightAgainst(MainPlayer);
 
                                     // Request backup and play shots fired audio
-                                    PolicingRedefined.API.BackupDispatchAPI.RequestPanicBackup();
+                                    UltimateBackup.API.Functions.callPanicButtonBackup(true);
                                     LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_ShotsFired_Audio_Remastered_01");
 
                                     if (Settings.EnableLogs)
@@ -260,8 +260,7 @@ namespace Adam69Callouts.Callouts
                         if (counter == 2)
                         {
                             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_OfficerDown_Audio_2");
-                            PolicingRedefined.API.BackupDispatchAPI.RequestOfficerDownBackup();
-                            PolicingRedefined.API.BackupDispatchAPI.RequestEMSCode3Backup();
+                            UltimateBackup.API.Functions.callAmbulance();
                         }
                         if (counter == 3)
                         {
@@ -273,7 +272,7 @@ namespace Adam69Callouts.Callouts
                         if (counter == 4)
                         {
                             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_ShotsFired_Audio_Remastered_01");
-                            PolicingRedefined.API.BackupDispatchAPI.RequestPanicBackup();
+                            UltimateBackup.API.Functions.callPanicButtonBackup(true);
                         }
                     }
                     catch (Exception ex)
