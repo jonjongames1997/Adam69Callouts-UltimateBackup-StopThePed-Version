@@ -72,7 +72,7 @@ namespace Adam69Callouts.Callouts
 
             if (Game.IsKeyDown(System.Windows.Forms.Keys.NumPad1))
             {
-                PolicingRedefined.API.BackupDispatchAPI.RequestAnimalControlBackup();
+                StopThePed.API.Functions.callAnimalControl();
                 Game.DisplaySubtitle("~b~You~w~: Dispatch, requesting Animal Control to my 20.");
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_AnimalControl_Audio_01");
             }
