@@ -29,3 +29,19 @@ D:\Adam69Callouts\bin\Debug\Newtonsoft.Json.xml
 D:\Adam69Callouts\bin\Debug\PolicingRedefined.dll
 D:\Adam69Callouts\bin\Debug\RagePluginHook.dll
 D:\Adam69Callouts\bin\Debug\RagePluginHook.xml
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\obj\Debug\Adam69Callouts.csproj.AssemblyReference.cache
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\obj\Debug\Adam69Callouts.csproj.CoreCompileInputs.cache
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\obj\Debug\Adam69Callouts.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\obj\Debug\Adam69Callouts.pdb
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\Adam69Callouts.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\Adam69Callouts.pdb
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\Newtonsoft.Json.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\RAGENativeUI.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\RagePluginHook.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\StopThePed.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\UltimateBackup.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\Newtonsoft.Json.xml
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\RAGENativeUI.xml
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\bin\Debug\RagePluginHook.xml
+D:\Callout Development\Adam69Callouts-UltimateBackup-StopThePed-Version\obj\Debug\Adam69Ca.98F163C7.Up2Date
