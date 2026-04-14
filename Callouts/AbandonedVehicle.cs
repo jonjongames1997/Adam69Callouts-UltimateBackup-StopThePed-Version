@@ -80,7 +80,7 @@ namespace Adam69Callouts.Callouts
 
             if (Game.IsKeyDown(System.Windows.Forms.Keys.K))
             {
-                PolicingRedefined.API.BackupDispatchAPI.RequestTowServiceBackup();
+                StopThePed.API.Functions.callTowService();
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Tow_Truck_Audio");
             }
 
@@ -131,8 +131,6 @@ namespace Adam69Callouts.Callouts
             if (_vehicleBlip.Exists()) _vehicleBlip.Delete();
             Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "~w~Abandoned Vehicle", "~b~You~w~: Dispatch, we are ~g~CODE 4~w~. Show me back 10-8.");
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Code_4_Audio");
-
-            PolicingRedefined.API.TrafficControlAPI.Clear();
 
             if (Settings.MissionMessages)
             {
