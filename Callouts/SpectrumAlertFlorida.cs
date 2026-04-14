@@ -213,11 +213,11 @@ namespace Adam69Callouts.Callouts
                 }
             }
 
-            // Allow calling backup or K9
-            if (Game.IsKeyDown(Settings.RequestVehicleInfo))
+            // Allow calling backup
+            if (Game.IsKeyDown(Settings.RequestCode2BackUp))
             {
                 GameFiber.Sleep(200);
-                PolicingRedefined.API.InfoDispatchAPI.RunNearestVehicleThroughDispatch(true);
+                UltimateBackup.API.Functions.callCode2Backup();
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Backup_Audio");
             }
 
