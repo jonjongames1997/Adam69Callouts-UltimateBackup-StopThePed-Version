@@ -38,6 +38,12 @@ namespace Adam69Callouts
         internal static bool TrafficAccident { get; set; } = true;
         internal static bool RoadDebris { get; set; } = true;
         internal static bool DisabledVehicle { get; set; } = true;
+        internal static bool TrafficLightOut { get; set; } = true;
+        internal static Keys RequestCode2BackUp { get; set; } = Keys.NumPad1;
+        internal static Keys RequestCode3BackUp { get; set; } = Keys.NumPad2;
+        internal static Keys RequestPanicBackUp { get; set; } = Keys.NumPad0;
+        internal static Keys RequestK9Unit { get; set; } = Keys.NumPad3;
+        internal static bool ToplessBeachgoer { get; set; } = true;
 
         // Traffic settings (configurable via INI)
         internal static float TrafficStopRadius { get; set; } = 60f; // meters
@@ -64,6 +70,17 @@ namespace Adam69Callouts
             Settings.DerangedDrunkenFeller = initializationFile.ReadBoolean("Callouts", "DerangedDrunkenFeller", false);
             Settings.DeadBirdOnTheRoad = initializationFile.ReadBoolean("Callouts", "DeadBirdOnTheRoad", true);
             Settings.KnifeAttack = initializationFile.ReadBoolean("Callouts", "KnifeAttack", true);
+            Settings.NakedDrugUser = initializationFile.ReadBoolean("Callouts", "NakedDrugUser", true);
+            Settings.DisabledVehicle = initializationFile.ReadBoolean("Callouts", "DisabledVehicle", true);
+            Settings.IllegalHuntingBlaineCounty = initializationFile.ReadBoolean("Callouts", "IllegalHuntingBlaineCounty", true);
+            Settings.IndecentExposure = initializationFile.ReadBoolean("Callouts", "IndecentExposure", true);
+            Settings.LostDogCallout = initializationFile.ReadBoolean("Callouts", "LostDog", true);
+            Settings.LSIAAirportIncident = initializationFile.ReadBoolean("Callouts", "LSIAAirportIncident", true);
+            Settings.RoadDebris = initializationFile.ReadBoolean("Callouts", "RoadDebris", true);
+            Settings.SoveriegnCitizen = initializationFile.ReadBoolean("Callouts", "SoveriegnCitizen", true);
+            Settings.SpectrumAlertFlorida = initializationFile.ReadBoolean("Callouts", "SpectrumAlertFlorida", true);
+            Settings.TrafficAccident = initializationFile.ReadBoolean("Callouts", "TrafficAccident", true);
+            Settings.TrafficLightOut = initializationFile.ReadBoolean("Callouts", "TrafficLightOut", true);
             HelpMessages = initializationFile.ReadBoolean("Settings", "HelpMessages", true);
             MissionMessages = initializationFile.ReadBoolean("Settings", "MissionMessages", true);
             EndCall = initializationFile.ReadEnum<Keys>("Keys", "EndCall", Keys.End);
@@ -73,16 +90,11 @@ namespace Adam69Callouts
             CallAnimalControlKey = initializationFile.ReadEnum<Keys>("Keys", "CallAnimalControlKey", Keys.NumPad1);
             CallAmbulanceKey = initializationFile.ReadEnum<Keys>("Keys", "CallAmbulanceKey", Keys.K);
             RequestTowTruck = initializationFile.ReadEnum<Keys>("Keys", "RequestTowTruck", Keys.L);
-            Settings.LSIAAirportIncident = initializationFile.ReadBoolean("Callouts", "LSIAAirportIncident", true);
-            Settings.IndecentExposure = initializationFile.ReadBoolean("Callouts", "IndecentExposure", true);
-            Settings.IllegalHuntingBlaineCounty = initializationFile.ReadBoolean("Callouts", "IllegalHuntingBlaineCounty", true);
-            Settings.SpectrumAlertFlorida = initializationFile.ReadBoolean("Callouts", "SpectrumAlertFlorida", true);
-            Settings.LostDogCallout = initializationFile.ReadBoolean("Callouts", "LostDog", true);
-            Settings.SoveriegnCitizen = initializationFile.ReadBoolean("Callouts", "SoveriegnCitizen", true);
-            Settings.NakedDrugUser = initializationFile.ReadBoolean("Callouts", "NakedDrugUser", true);
-            Settings.TrafficAccident = initializationFile.ReadBoolean("Callouts", "TrafficAccident", true);
-            Settings.RoadDebris = initializationFile.ReadBoolean("Callouts", "RoadDebris", true);
-            Settings.DisabledVehicle = initializationFile.ReadBoolean("Callouts", "DisabledVehicle", true);
+            RequestCode2BackUp = initializationFile.ReadEnum<Keys>("Keys", "RequestCode2BackUp", Keys.NumPad1);
+            RequestCode3BackUp = initializationFile.ReadEnum<Keys>("Keys", "RequestCode3BackUp", Keys.NumPad2);
+            RequestPanicBackUp = initializationFile.ReadEnum<Keys>("Keys", "RequestPanicBackUp", Keys.NumPad0);
+            RequestK9Unit = initializationFile.ReadEnum<Keys>("Keys", "RequestK9Unit", Keys.NumPad3);
+            ToplessBeachgoer = initializationFile.ReadBoolean("Callouts", "ToplessBeachgoer", true);
 
             // Read traffic settings (as strings then parse to allow safe parsing)
             var radiusStr = initializationFile.ReadString("Traffic", "StopRadius", Settings.TrafficStopRadius.ToString(CultureInfo.InvariantCulture));
@@ -145,6 +157,12 @@ namespace Adam69Callouts
             ini.Write("Callouts", "TrafficAccident", true);
             ini.Write("Callouts", "RoadDebris", true);
             ini.Write("Callouts", "DisabledVehicle", true);
+            ini.Write("Callouts", "TrafficLightOut", true);
+            ini.Write("Callouts", "ToplessBeachgoer", true);
+            ini.Write("Keys", "RequestCode2BackUp", Keys.NumPad1);
+            ini.Write("Keys", "RequestCode3BackUp", Keys.NumPad2);
+            ini.Write("Keys", "RequestPanicBackUp", Keys.NumPad0);
+            ini.Write("Keys", "RequestK9Unit", Keys.NumPad3);
 
             // Traffic settings
             ini.Write("Traffic", "StopRadius", TrafficStopRadius);
