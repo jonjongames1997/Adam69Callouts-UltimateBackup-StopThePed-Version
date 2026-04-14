@@ -78,7 +78,7 @@ namespace Adam69Callouts.Callouts
         {
             if (Game.IsKeyDown(System.Windows.Forms.Keys.P))
             {
-                PolicingRedefined.API.VehicleAPI.RunVehicleThroughDispatch(motorVehicle, true, true, true);
+                StopThePed.API.Functions.requestDispatchVehiclePlateCheck(true);
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Dispatch_Audio");
             }
 
