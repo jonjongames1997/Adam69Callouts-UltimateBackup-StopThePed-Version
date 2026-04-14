@@ -314,7 +314,7 @@ namespace Adam69Callouts.Callouts
             // Request backup hotkey
             if (Game.IsKeyDown(System.Windows.Forms.Keys.B) && !Game.IsKeyDownRightNow(System.Windows.Forms.Keys.B))
             {
-                PolicingRedefined.API.BackupDispatchAPI.RequestCode3Backup();
+                UltimateBackup.API.Functions.callCode2Backup();
                 Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "~w~Dispatch:", "Additional units en route to your location.");
             }
 
@@ -603,7 +603,7 @@ namespace Adam69Callouts.Callouts
                         Game.DisplaySubtitle("~r~Suspect~w~: Fine! You're oppressing me but whatever!");
                         GameFiber.Sleep(2000);
                         Game.DisplaySubtitle("~g~The suspect reluctantly complies. Process them for indecent exposure.");
-                        PolicingRedefined.API.PedAPI.CanRunPedThroughDispatch(suspect);
+                        UltimateBackup.API.Functions.callCode2Backup(suspect);
                         scenarioTriggered = true;
                     }
                     else if (exhibitionistOutcome == 2)
@@ -621,7 +621,7 @@ namespace Adam69Callouts.Callouts
                         Game.DisplaySubtitle("~r~Suspect~w~: You can't tell me what to do!");
                         GameFiber.Sleep(1000);
                         suspect.Tasks.FightAgainst(MainPlayer);
-                        PolicingRedefined.API.PedAPI.IsPedResistingRightNow(suspect);
+                        UltimateBackup.API.Functions.callCode3Backup(suspect);
                         Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "~w~Suspect Resisting", "~r~Suspect is physically resisting!");
                         scenarioTriggered = true;
                     }
@@ -684,7 +684,7 @@ namespace Adam69Callouts.Callouts
                 case 5:
                     Game.DisplaySubtitle("~g~The suspect is fully compliant and remorseful. Process them for indecent exposure.");
                     GameFiber.Sleep(2000);
-                    PolicingRedefined.API.PedAPI.CanRunPedThroughDispatch(suspect);
+                    UltimateBackup.API.Functions.callCode2Backup(suspect);
                     Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "~w~Indecent Exposure", "~b~Subject is cooperative. Run warrant check and process accordingly.");
                     scenarioTriggered = true;
                     break;
