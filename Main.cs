@@ -6,8 +6,10 @@ namespace Adam69Callouts
     public class Main : Plugin
     {
         public static bool CalloutInterface;
-        public static bool PolicingRedefined;
+        public static bool StopThePed;
+        public static bool UltimateBackup;
 
+        // DLC Checker - Checks whether or not the user has a specific DLC in their mods folder //
         public static bool IsDlcInstalled(string dlcName)
         {
             uint dlcHash = Game.GetHashKey(dlcName);
@@ -160,15 +162,25 @@ namespace Adam69Callouts
                 Game.LogTrivial("User does NOT have CalloutInterface installed. Stopping integration....");
                 CalloutInterface = false;
             }
-            if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("PolicingRedefined")) == true)
+            if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("StopThePed")) == true)
             {
-                Game.LogTrivial("User has Policing Redefined 1.0.0.2 by MarcelWRLD INSTALLED. starting integration.......");
-                PolicingRedefined = true;
+                Game.LogTrivial("User has Stop The Ped by Bejoijo INSTALLED. starting integration.......");
+                StopThePed = true;
             }
             else
             {
-                Game.LogTrivial("User does NOT have Policing Redefined 1.0.0.2 by MarcelWRLD installed. Stopping integration....");
-                PolicingRedefined = false;
+                Game.LogTrivial("User does NOT have Stop The Ped by Bejoijo installed. Stopping integration....");
+                StopThePed = false;
+            }
+            if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("UltimateBackup")) == true)
+            {
+                Game.LogTrivial("User has UltimateBackup by Bejoijo INSTALLED. starting integration.......");
+                UltimateBackup = true;
+            }
+            else
+            {
+                Game.LogTrivial("User does NOT have UltimateBackup by Bejoijo installed. Stopping integration....");
+                UltimateBackup = false;
             }
 
             Game.Console.Print();
@@ -198,6 +210,7 @@ namespace Adam69Callouts
             if (Settings.TrafficAccident) { Functions.RegisterCallout(typeof(TrafficAccident)); }
             if (Settings.RoadDebris) { Functions.RegisterCallout(typeof(RoadDebris)); }
             if (Settings.DisabledVehicle) { Functions.RegisterCallout(typeof(DisabledVehicle)); }
+            if (Settings.ToplessBeachgoer) { Functions.RegisterCallout(typeof(ToplessBeachgoer)); }
             Game.Console.Print("[LOG]: All callouts of the Adam69Callouts.ini were loaded successfully.");
             Game.Console.Print();
             Game.Console.Print("================================================== Adam69 Callouts ===================================================");
