@@ -4,8 +4,8 @@ using Rage;
 using Rage.Native;
 using System;
 using System.Collections.Generic;
-using PolicingRedefined.API;
-using PolicingRedefined;
+using StopThePed;
+using UltimateBackup;
 
 namespace Adam69Callouts.Callouts
 {
@@ -223,7 +223,7 @@ namespace Adam69Callouts.Callouts
                                     // Hostile armed — fight or flee
                                     suspect.Tasks.FightAgainst(MainPlayer);
                                     suspect.Armor = 300;
-                                    PolicingRedefined.API.BackupDispatchAPI.RequestPanicBackup();
+                                    UltimateBackup.API.Functions.callPanicButtonBackup(true);
                                     LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("OFFICERS_UNDER_FIRE");
                                 }
                                 else
@@ -259,7 +259,8 @@ namespace Adam69Callouts.Callouts
                 if (Game.IsKeyDown(Settings.RequestVehicleInfo))
                 {
                     GameFiber.Sleep(300);
-                    PolicingRedefined.API.InfoDispatchAPI.RunNearestVehicleThroughDispatch(true);
+                    StopThePed.API.Functions.getVehicleRegistrationStatus(suspectVehicle);
+                    StopThePed.API.Functions.getVehicleInsuranceStatus(suspectVehicle);
                     LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Backup_Audio");
                     Game.DisplaySubtitle("~b~You~w~: Dispatch, requesting backup.");
                 }
@@ -267,7 +268,7 @@ namespace Adam69Callouts.Callouts
                 if (Game.IsKeyDown(Settings.RequestTowTruck))
                 {
                     GameFiber.Sleep(300);
-                    PolicingRedefined.API.BackupDispatchAPI.RequestTowServiceBackup();
+                    StopThePed.API.Functions.callTowService();
                     LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Tow_Truck_Audio");
                     Game.DisplaySubtitle("~b~You~w~: Dispatch, request tow/K9 as needed.");
                 }
