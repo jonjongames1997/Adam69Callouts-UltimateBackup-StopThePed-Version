@@ -135,7 +135,7 @@ namespace Adam69Callouts.Callouts
                                 if (counter == 7)
                                 {
                                     Game.DisplaySubtitle("~b~You~w~: Dispatch, request a 10-27.");
-                                    PolicingRedefined.API.PedAPI.CanRunPedThroughDispatch(suspect);
+                                    StopThePed.API.Functions.requestDispatchPedCheck(true);
                                 }
                                 if (counter == 8)
                                 {
