@@ -24,7 +24,7 @@ namespace Adam69Callouts.Callouts
         private static bool willFlee;
         private static bool animalKilled;
         private static readonly string[] hunterVehicles = new string[] { "rebel", "bison", "bodhi", "dloader", "sandking" };
-        private static readonly string[] endangeredAnimals = new string[] { "a_c_deer", "a_c_boar", "a_c_coyote", "a_c_mtlion" };
+        private static readonly string[] endangeredAnimals = new string[] { "a_c_pig", "a_c_cow", "a_c_coyote", "a_c_mtlion" };
         private static readonly string[] huntingWeapons = new string[] { "weapon_sniperrifle", "weapon_assaultrifle", "weapon_carbinerifle" };
         private static LHandle pursuit;
 
