@@ -212,20 +212,20 @@ namespace Adam69Callouts.Callouts
                             {
                                 case 1:
                                     Game.DisplaySubtitle("~r~Suspect~w~: I'm going to stab you!", 5000);
-                                    PolicingRedefined.API.PedAPI.IsPedResistingRightNow(suspect);
+                                    UltimateBackup.API.Functions.callCode3Backup();
                                     hasSpoke = true;
                                     break;
 
                                 case 2:
                                     Game.DisplaySubtitle("~r~Suspect~w~: You picked the wrong person to mess with!", 5000);
-                                    PolicingRedefined.API.PedAPI.IsPedResistingRightNow(suspect);
+                                    UltimateBackup.API.Functions.callPanicButtonBackup(false);
                                     hasSpoke = true;
                                     break;
 
                                 case 3:
                                     Game.DisplaySubtitle("~r~Suspect~w~: I'll cut you!", 5000);
-                                    PolicingRedefined.API.PedAPI.GetPedResistanceAction(suspect);
-                                    PolicingRedefined.API.BackupDispatchAPI.RequestPanicBackup();
+                                    UltimateBackup.API.Functions.callGroupBackup(false);
+                                    UltimateBackup.API.Functions.callPanicButtonBackup(false);
                                     hasSpoke = true;
                                     break;
                             }
@@ -239,7 +239,7 @@ namespace Adam69Callouts.Callouts
                                 pursuit = LSPD_First_Response.Mod.API.Functions.CreatePursuit();
                                 LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(pursuit, suspect);
                                 LSPD_First_Response.Mod.API.Functions.SetPursuitIsActiveForPlayer(pursuit, true);
-                                PolicingRedefined.API.BackupDispatchAPI.RequestPursuitBackup();
+                                UltimateBackup.API.Functions.callPursuitBackup();
                                 hasPursuitBegun = true;
                             }
 
@@ -254,7 +254,7 @@ namespace Adam69Callouts.Callouts
 
             if (Game.IsKeyDown(System.Windows.Forms.Keys.K))
             {
-                PolicingRedefined.API.BackupDispatchAPI.RequestEMSCode3Backup();
+                UltimateBackup.API.Functions.callAmbulance();
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Call_Ambulance_Audio");
                 Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "~w~Dispatch:", "An Ambulance has been called to the scene.");
             }
