@@ -4,7 +4,8 @@
 
 - Added 4 new callouts
 - Minor Bug Fixes
-- 
+- Fixed invalid GTA Models in Illegal Hunting Blaine County Callout with Valid models
+- Minor Bug Fixes and improvements
 
 Note: Lost Dog callout has returned. May expect bugs.
 
