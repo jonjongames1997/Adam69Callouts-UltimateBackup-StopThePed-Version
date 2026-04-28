@@ -86,7 +86,7 @@ namespace Adam69Callouts.Callouts
                     suspectVehicle.IsEngineOn = false;
                     if (suspectVehicle.IsSeatFree((int)VehicleSeat.Passenger))
                     {
-                        missingPerson.IsPersistent = true;
+                        missingPerson.MakePersistent();
                         missingPerson.BlockPermanentEvents = true;
                         missingBlip = missingPerson.AttachBlip();
                         missingBlip.Color = System.Drawing.Color.Yellow;
