@@ -40,8 +40,15 @@ namespace Adam69Callouts.Callouts
 
         public override bool OnCalloutAccepted()
         {
-            if (Settings.EnableLogs) Game.LogTrivial("[Adam69 Callouts LOG]: Traffic Light Out callout accepted!");
-
+            if (Settings.EnableLogs)
+            {
+                Game.LogTrivial("[Adam69 Callouts LOG]: Traffic Light Out callout accepted!");
+            }
+            else
+            {
+                Settings.EnableLogs = false;
+            }
+            
             Game.DisplayNotification("web_adam69callouts", "web_adam69callouts", "~w~Adam69 Callouts", "Traffic Light Out", "~b~Dispatch~w~: Traffic lights out. Multiple vehicles and possible minor collisions. Respond ~r~Code 2~w~.");
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Respond_Code_2_Audio");
 
