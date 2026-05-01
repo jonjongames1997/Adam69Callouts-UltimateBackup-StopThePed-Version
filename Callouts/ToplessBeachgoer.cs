@@ -63,7 +63,7 @@ namespace Adam69Callouts.Callouts
             "a_f_y_tourist_01",         // Tourist female
             "a_f_y_fitness_01",         // Fitness female
             "a_f_m_bodybuild_01",       // Bodybuilder female
-            "a_f_y_bikerhipster_01"     // Biker hipster female
+            "a_f_y_topless_01"          // Topless Female
         };
 
         private static readonly string[] compliantPeds = new string[]
@@ -355,6 +355,7 @@ namespace Adam69Callouts.Callouts
             GameFiber.Sleep(4000);
             Game.DisplaySubtitle($"~b~You~w~: Thank you for the report, {witnessGender}. I'll handle this. Please step back.");
             GameFiber.Sleep(3000);
+
 
             if (witnessBlip != null && witnessBlip.Exists())
             {
