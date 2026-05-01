@@ -168,7 +168,8 @@ namespace Adam69Callouts.Callouts
 
         public override void Process()
         {
-            if (MainPlayer.DistanceTo(officer) <= 10f)
+            // Validate officer exists before checking distance
+            if (officer != null && officer.Exists() && officer.IsValid() && MainPlayer.DistanceTo(officer) <= 10f)
             {
                 if (Settings.HelpMessages)
                 {
@@ -181,7 +182,7 @@ namespace Adam69Callouts.Callouts
                 }
 
                 // NEW: when player arrives, have suspect run into strip club and start shooting
-                if (!suspectStartedShooting && suspect != null && suspect.IsValid())
+                if (!suspectStartedShooting && suspect != null && suspect.Exists() && suspect.IsValid())
                 {
                     try
                     {
@@ -199,13 +200,13 @@ namespace Adam69Callouts.Callouts
 
                                 // Wait until suspect is close to the target or until suspect becomes invalid
                                 int waitTicks = 0;
-                                while (suspect != null && suspect.IsValid() && suspect.Position.DistanceTo2D(stripClubPosition) > 3f && waitTicks < 1000)
+                                while (suspect != null && suspect.Exists() && suspect.IsValid() && suspect.Position.DistanceTo2D(stripClubPosition) > 3f && waitTicks < 1000)
                                 {
                                     GameFiber.Yield();
                                     waitTicks++;
                                 }
 
-                                if (suspect != null && suspect.IsValid())
+                                if (suspect != null && suspect.Exists() && suspect.IsValid())
                                 {
                                     // Equip weapon and armour
                                     suspect.Inventory.GiveNewWeapon("WEAPON_COMBATPISTOL", 500, true);
@@ -264,10 +265,14 @@ namespace Adam69Callouts.Callouts
                         }
                         if (counter == 3)
                         {
-                            suspect.Tasks.FightAgainst(MainPlayer);
-                            suspect.Inventory.GiveNewWeapon("WEAPON_COMBATPISTOL", 500, true);
-                            suspect.Armor = armorCount;
-                            MainPlayer.Armor = armorCount;
+                            // Validate suspect before giving tasks
+                            if (suspect != null && suspect.Exists() && suspect.IsValid())
+                            {
+                                suspect.Tasks.FightAgainst(MainPlayer);
+                                suspect.Inventory.GiveNewWeapon("WEAPON_COMBATPISTOL", 500, true);
+                                suspect.Armor = armorCount;
+                                MainPlayer.Armor = armorCount;
+                            }
                         }
                         if (counter == 4)
                         {
