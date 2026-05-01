@@ -233,11 +233,10 @@ namespace Adam69Callouts.Callouts
                         bigMessage.MessageInstance.ShowColoredShard("Callout Failed!", "You are now ~r~CODE 4~w~.", RAGENativeUI.HudColor.Red, RAGENativeUI.HudColor.Black, 5000);
                     }
                     End();
-                    return;
                 }
 
                 // End call key
-                if (Game.IsKeyDown(Settings.EndCall))
+                if (Game.IsKeyDown(System.Windows.Forms.Keys.End))
                 {
                     if (Settings.MissionMessages)
                     {
@@ -245,7 +244,6 @@ namespace Adam69Callouts.Callouts
                         bigMessage.MessageInstance.ShowColoredShard("Callout Complete!", "Scene cleared. You are now ~r~CODE 4~w~.", RAGENativeUI.HudColor.Green, RAGENativeUI.HudColor.Black, 5000);
                     }
                     End();
-                    return;
                 }
             }
             catch (Exception ex)
