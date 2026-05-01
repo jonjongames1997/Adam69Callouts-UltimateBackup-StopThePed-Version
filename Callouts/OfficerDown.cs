@@ -319,7 +319,15 @@ namespace Adam69Callouts.Callouts
 
         public override void End()
         {
-            if (officer != null && officer.Exists()) officer.WarpIntoVehicle(emergencyVehicle, -1);
+            // Only attempt to warp officer if alive and valid
+            if (officer != null && officer.Exists() && officer.IsValid() && officer.IsAlive)
+            {
+                if (emergencyVehicle != null && emergencyVehicle.Exists() && emergencyVehicle.IsValid())
+                {
+                    officer.WarpIntoVehicle(emergencyVehicle, -1);
+                }
+            }
+            
             if (officer != null && officer.Exists()) officer.Dismiss();
             if (copBlip != null && copBlip.Exists()) copBlip.Delete();
             if (suspect != null && suspect.Exists()) suspect.Dismiss();
