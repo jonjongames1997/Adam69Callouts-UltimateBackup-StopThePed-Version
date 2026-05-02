@@ -55,6 +55,15 @@ namespace Adam69Callouts.Utilities
         private static float TrafficDensityMultiplier { get; set; }
         private static float TrafficRestoreMultiplier { get; set; }
 
+        /// <summary>
+        /// Public method to initialize the configuration system
+        /// </summary>
+        public static void Initialize()
+        {
+            LoadConfig();
+            CreateConfig();
+        }
+
         private static void LoadConfig()
         {
             Directory.CreateDirectory("Plugins\\LSPDFR\\Adam69Callouts");
