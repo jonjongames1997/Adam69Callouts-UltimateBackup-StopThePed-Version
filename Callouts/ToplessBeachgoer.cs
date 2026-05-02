@@ -15,6 +15,7 @@ namespace Adam69Callouts.Callouts
         private static float suspectHeading;
         private static float witnessHeading;
         private static int counter;
+        private static int witnessCounter;
         private static string malefemale;
         private static string witnessGender;
         private static bool scenarioTriggered;
@@ -182,6 +183,7 @@ namespace Adam69Callouts.Callouts
             }
 
             counter = 0;
+            witnessCounter = 0;
             scenarioTriggered = false;
             pursuitCreated = false;
             behaviorStarted = false;
@@ -292,13 +294,14 @@ namespace Adam69Callouts.Callouts
             {
                 if (MainPlayer.DistanceTo(witness) <= 10f)
                 {
-                    if (Settings.HelpMessages && counter == 0)
+                    if (Settings.HelpMessages && witnessCounter == 0) // CHANGED: Use witnessCounter instead of counter
                     {
                         Game.DisplayHelp("Press ~y~H~w~ to speak with the witness.");
                     }
 
                     if (Game.IsKeyDown(System.Windows.Forms.Keys.H))
                     {
+                        witnessCounter++;
                         HandleWitnessInteraction();
                     }
                 }
