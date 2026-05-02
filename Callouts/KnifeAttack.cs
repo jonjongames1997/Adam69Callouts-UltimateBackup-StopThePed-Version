@@ -8,21 +8,21 @@ namespace Adam69Callouts.Callouts
     {
 
         // General variables
-        private static Ped suspect;
-        private static Ped victim;
-        private static float suspectHeading;
-        private static float victimHeading;
-        private static Vector3 spawnpoint;
-        private static Vector3 victimSpawn;
-        private static Blip suspectBlip;
-        private static Blip victimBlip;
-        private static int _scenario;
-        private static bool hasBegunAttacking;
-        private static bool isArmed;
-        private static bool hasPursuitBegun;
-        private static bool hasSpoke;
-        private static bool ispursuitCreated = false;
-        private static LHandle pursuit;
+        private Ped suspect;
+        private Ped victim;
+        private float suspectHeading;
+        private float victimHeading;
+        private Vector3 spawnpoint;
+        private Vector3 victimSpawn;
+        private Blip suspectBlip;
+        private Blip victimBlip;
+        private int _scenario;
+        private bool hasBegunAttacking;
+        private bool isArmed;
+        private bool hasPursuitBegun;
+        private bool hasSpoke;
+        private bool ispursuitCreated = false;
+        private LHandle pursuit;
 
 
         // Helper: safely detect if a ped has a weapon (guards against invalid PedInventory)
@@ -32,12 +32,10 @@ namespace Adam69Callouts.Callouts
 
             try
             {
-                // Access Inventory safely; this can throw if PedInventory is invalid
                 return ped.Inventory != null && ped.Inventory.Weapons.Contains(weapon);
             }
             catch
             {
-                // Fallback to native check if Inventory is invalid
                 try
                 {
                     return (bool)NativeFunction.Natives.HAS_PED_GOT_WEAPON(ped, (int)weapon);
@@ -60,15 +58,11 @@ namespace Adam69Callouts.Callouts
             }
             catch
             {
-                // Fallback native: give weapon and equip it
                 try
                 {
                     NativeFunction.Natives.GIVE_WEAPON_TO_PED(ped, (int)weapon, 0, false, true);
                 }
-                catch
-                {
-                    // swallow - best effort
-                }
+                catch { }
             }
         }
 
@@ -87,10 +81,7 @@ namespace Adam69Callouts.Callouts
                 {
                     NativeFunction.Natives.SET_CURRENT_PED_WEAPON(ped, (int)weapon, true);
                 }
-                catch
-                {
-                    // swallow - best effort
-                }
+                catch { }
             }
         }
 
@@ -115,10 +106,6 @@ namespace Adam69Callouts.Callouts
             {
                 Game.LogTrivial("[Adam69 Callouts LOG]: Knife Attack callout accepted!");
                 LoggingManager.Log("Adam69 Callouts [LOG]: Knife Attack callout accepted!");
-            }
-            else
-            {
-                Settings.EnableLogs = false;
             }
 
 
@@ -182,23 +169,29 @@ namespace Adam69Callouts.Callouts
 
         public override void Process()
         {
-            // Ensure suspect is valid before accessing Inventory or other members to avoid invalid PedInventory exceptions
-            if (suspect != null && suspect.Exists() && suspect.IsValid())
+            if (suspect == null || !suspect.Exists() || !suspect.IsValid())
             {
-                // Use safe helpers instead of direct Inventory access which can throw
-                if (!TryPedHasWeapon(suspect, WeaponHash.Knife) && suspect.DistanceTo(MainPlayer.GetOffsetPosition(Vector3.RelativeFront)) < 20f)
+                base.Process();
+                return;
+            }
+
+            float distanceToPlayer = suspect.DistanceTo(MainPlayer.GetOffsetPosition(Vector3.RelativeFront));
+
+            if (!isArmed && distanceToPlayer < 20f)
+            {
+                if (!TryPedHasWeapon(suspect, WeaponHash.Knife))
                 {
                     SafeGiveWeapon(suspect, WeaponHash.Knife);
                     isArmed = true;
                 }
-                else if (!isArmed && TryPedHasWeapon(suspect, WeaponHash.Knife) && suspect.DistanceTo(MainPlayer.GetOffsetPosition(Vector3.RelativeFront)) < 20f)
+                else
                 {
                     SafeEquipWeapon(suspect, WeaponHash.Knife);
                     isArmed = true;
                 }
             }
 
-            if (!hasBegunAttacking && suspect != null && suspect.Exists() && suspect.IsValid() && suspect.DistanceTo(MainPlayer.GetOffsetPosition(Vector3.RelativeFront)) < 20f)
+            if (!hasBegunAttacking && distanceToPlayer < 20f)
             {
                 hasBegunAttacking = true;
                 GameFiber.StartNew(() =>
@@ -266,10 +259,6 @@ namespace Adam69Callouts.Callouts
                     BigMessageThread bigMessage = new BigMessageThread();
                     bigMessage.MessageInstance.ShowColoredShard("Suspect Neutralized!", "You are now ~r~CODE 4~w~.", RAGENativeUI.HudColor.Red, RAGENativeUI.HudColor.Black, 5000);
                 }
-                else
-                {
-                    Settings.MissionMessages = false;
-                }
 
                 this.End();
             }
@@ -290,22 +279,12 @@ namespace Adam69Callouts.Callouts
                 BigMessageThread bigMessage = new BigMessageThread();
                 bigMessage.MessageInstance.ShowColoredShard("Callout Complete!", "You are now ~r~CODE 4~w~.", RAGENativeUI.HudColor.Red, RAGENativeUI.HudColor.Black, 5000);
             }
-            else
-            {
-                Settings.MissionMessages = false;
-            }
             base.End();
 
             if (Settings.EnableLogs)
             {
-
                 Game.LogTrivial("Adam69 Callouts [LOG]: Knife Attack callout is CODE 4!");
-
                 LoggingManager.Log("Adam69 Callouts [LOG]: Knife Attack callout is CODE 4!");
-            }
-            else
-            {
-                Settings.EnableLogs = false;
             }
         }
     }
