@@ -23,7 +23,7 @@ namespace Adam69Callouts
                 {
                     Functions.OnOnDutyStateChanged += Functions_OnOnDutyStateChanged;
                     Game.AddConsoleCommands();
-                    Settings.LoadSettings();
+                    ConfigManager.Initialize();
                     Settings.SaveConfigSettings();
                     if (Settings.EnableLogs)
                     {
