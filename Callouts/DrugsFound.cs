@@ -12,6 +12,12 @@ namespace Adam69Callouts.Callouts
 
         private static readonly string[] drugList = new string[] { "sf_prop_sf_bag_weed_01b", "bkr_prop_weed_bigbag_open_01a", "m24_1_prop_m41_weed_bigbag_01a", "sf_prop_sf_bag_weed_open_01a", "m25_1_prop_m51_box_weed_01a", "m25_1_prop_m51_box_weed_02a", "m25_1_prop_m51_bag_weed_01a" };
 
+        // Cached animation dictionaries to avoid repeated allocations
+        private static readonly AnimationDictionary IdleAnim = new AnimationDictionary("rcmjosh1");
+        private static readonly AnimationDictionary ArgueAnim = new AnimationDictionary("anim@amb@casino@brawl@fights@argue@");
+        private static readonly AnimationDictionary CopIdleAnim = new AnimationDictionary("amb@world_human_cop_idles@male@idle_b");
+        private static readonly AnimationDictionary PickupAnim = new AnimationDictionary("anim@move_m@trash");
+
         private Vector3 spawnpoint;
         public Rage.Object theDrugs;
         private Ped theCaller;
@@ -32,6 +38,7 @@ namespace Adam69Callouts.Callouts
         private bool isCollected;
         private float callerHeading;
         private float copHeading;
+        private bool conversationComplete;
 
         public static bool IsDlcInstalled(uint dlcHash)
         {
@@ -77,7 +84,7 @@ namespace Adam69Callouts.Callouts
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Respond_Code_2_Audio");
 
             theCaller = new Ped(callerSpawn) { IsPersistent = true, BlockPermanentEvents = true };
-            theCaller.Tasks.PlayAnimation(new AnimationDictionary("rcmjosh1"), "idle", -1f, AnimationFlags.Loop);
+            theCaller.Tasks.PlayAnimation(IdleAnim, "idle", -1f, AnimationFlags.Loop);
 
             theDrugs = new Rage.Object("m25_1_prop_m51_bag_weed_01a", spawnpoint) { IsPersistent = true };
             // Add pickup blip via native
@@ -138,6 +145,7 @@ namespace Adam69Callouts.Callouts
 
             counter = 0;
             isCollected = false;
+            conversationComplete = false;
 
             return base.OnCalloutAccepted();
         }
@@ -157,36 +165,7 @@ namespace Adam69Callouts.Callouts
 
         public override void Process()
         {
-            // keep exception handling localized so we don't swallow normal flow
-            try
-            {
-                HandleConversation();
-            }
-            catch (Exception ex)
-            {
-                if (Settings.EnableLogs)
-                {
-                    Game.LogTrivial("Adam69 Callouts [LOG]: Error in conversation handling: " + ex.Message);
-                    LoggingManager.Log("Adam69 Callouts [LOG]: ERROR:" + ex.StackTrace);
-                    LoggingManager.Log("Adam69 Callouts [LOG]: ERROR:" + ex.Message);
-                }
-            }
-
-            try
-            {
-                HandlePickupAndInputs();
-            }
-            catch (Exception ex)
-            {
-                if (Settings.EnableLogs)
-                {
-                    Game.LogTrivial("Adam69 Callouts [LOG]: Error in pickup/inputs handling: " + ex.Message);
-                    LoggingManager.Log("Adam69 Callouts [LOG]: ERROR:" + ex.StackTrace);
-                    LoggingManager.Log("Adam69 Callouts [LOG]: ERROR:" + ex.Message);
-                }
-            }
-
-            // Player death check
+            // Early exit checks - minimize work on critical paths
             if (MainPlayer.IsDead)
             {
                 if (Settings.MissionMessages)
@@ -194,13 +173,11 @@ namespace Adam69Callouts.Callouts
                     BigMessageThread bigMessage = new BigMessageThread();
                     bigMessage.MessageInstance.ShowColoredShard("Callout Failed!", "You are now ~r~CODE 4~w~.", RAGENativeUI.HudColor.Red, RAGENativeUI.HudColor.Black, 5000);
                 }
-
                 End();
                 base.Process();
                 return;
             }
 
-            // End call key
             if (Game.IsKeyDown(Settings.EndCall))
             {
                 if (Settings.MissionMessages)
@@ -213,6 +190,25 @@ namespace Adam69Callouts.Callouts
                 return;
             }
 
+            // Consolidated exception handling for better performance
+            try
+            {
+                if (!conversationComplete)
+                {
+                    HandleConversation();
+                }
+                HandlePickupAndInputs();
+            }
+            catch (Exception ex)
+            {
+                if (Settings.EnableLogs)
+                {
+                    Game.LogTrivial($"Adam69 Callouts [LOG]: Error in DrugsFound process: {ex.Message}");
+                    LoggingManager.Log($"Adam69 Callouts [LOG]: ERROR: {ex.StackTrace}");
+                    LoggingManager.Log($"Adam69 Callouts [LOG]: ERROR: {ex.Message}");
+                }
+            }
+
             base.Process();
         }
 
@@ -220,7 +216,9 @@ namespace Adam69Callouts.Callouts
         {
             if (theCaller == null || !theCaller.Exists()) return;
 
-            if (MainPlayer.DistanceTo(theCaller) <= 5f && Game.IsKeyDown(System.Windows.Forms.Keys.Y))
+            // Cache distance check to avoid multiple calculations
+            float distanceToCaller = MainPlayer.DistanceTo(theCaller);
+            if (distanceToCaller <= 5f && Game.IsKeyDown(System.Windows.Forms.Keys.Y))
             {
                 counter++;
 
@@ -228,32 +226,33 @@ namespace Adam69Callouts.Callouts
                 {
                     case 1:
                         NativeFunction.Natives.TASK_TURN_PED_TO_FACE_ENTITY(theCaller, MainPlayer, -1);
-                        if (theCop != null) theCop.Tasks.PlayAnimation(new AnimationDictionary("amb@world_human_cop_idles@male@idle_b"), "idle_e", -1f, AnimationFlags.Loop);
-                        Game.DisplaySubtitle("~b~You~w~: Hello there, " + malefemale + ". Are you the caller?");
+                        if (theCop != null) theCop.Tasks.PlayAnimation(CopIdleAnim, "idle_e", -1f, AnimationFlags.Loop);
+                        Game.DisplaySubtitle($"~b~You~w~: Hello there, {malefemale}. Are you the caller?");
                         break;
                     case 2:
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("anim@amb@casino@brawl@fights@argue@"), "arguement_loop_mp_m_brawler_01", -1f, AnimationFlags.Loop);
-                        Game.DisplaySubtitle("~o~The Caller~w~: Yes I am, " + copGender + ".");
+                        theCaller.Tasks.PlayAnimation(ArgueAnim, "arguement_loop_mp_m_brawler_01", -1f, AnimationFlags.Loop);
+                        Game.DisplaySubtitle($"~o~The Caller~w~: Yes I am, {copGender}.");
                         break;
                     case 3:
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("rcmjosh1"), "idle", -1f, AnimationFlags.Loop);
+                        theCaller.Tasks.PlayAnimation(IdleAnim, "idle", -1f, AnimationFlags.Loop);
                         Game.DisplaySubtitle("~b~You~w~: Can you explain how did you find the drugs?");
                         break;
                     case 4:
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("anim@amb@casino@brawl@fights@argue@"), "arguement_loop_mp_m_brawler_01", -1f, AnimationFlags.Loop);
+                        theCaller.Tasks.PlayAnimation(ArgueAnim, "arguement_loop_mp_m_brawler_01", -1f, AnimationFlags.Loop);
                         Game.DisplaySubtitle("~o~The Caller~w~: I was going for a walk then I spotted this opened bag of weed from LD Organics. I didn't know who owns that bag of weed. That's why I called.");
                         break;
                     case 5:
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("rcmjosh1"), "idle", -1f, AnimationFlags.Loop);
+                        theCaller.Tasks.PlayAnimation(IdleAnim, "idle", -1f, AnimationFlags.Loop);
                         Game.DisplaySubtitle("~b~You~w~: We really appreciate that you reported it. I'll investigate this. I just need to see your ID so I know who I'm talking to.");
                         break;
                     case 6:
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("anim@amb@casino@brawl@fights@argue@"), "arguement_loop_mp_m_brawler_01", -1f, AnimationFlags.Loop);
+                        theCaller.Tasks.PlayAnimation(ArgueAnim, "arguement_loop_mp_m_browler_01", -1f, AnimationFlags.Loop);
                         Game.DisplaySubtitle("~o~The Caller~w~: Ok, no problem. I'm really in a hurry. I got to go watch Kansas City Chiefs vs Buffalo Bills game.");
                         break;
                     default:
                         Game.DisplaySubtitle("Convo Ended. Deal with the situation you may see fit.");
-                        theCaller.Tasks.PlayAnimation(new AnimationDictionary("rcmjosh1"), "idle", -1f, AnimationFlags.Loop);
+                        theCaller.Tasks.PlayAnimation(IdleAnim, "idle", -1f, AnimationFlags.Loop);
+                        conversationComplete = true; // Mark conversation as complete
                         break;
                 }
             }
@@ -261,17 +260,25 @@ namespace Adam69Callouts.Callouts
 
         private void HandlePickupAndInputs()
         {
-            if (theDrugs != null && theDrugs.Exists() && MainPlayer.DistanceTo(theDrugs) <= 5f)
+            if (isCollected || theDrugs == null || !theDrugs.Exists()) return;
+
+            // Cache distance check
+            float distanceToDrugs = MainPlayer.DistanceTo(theDrugs);
+            if (distanceToDrugs <= 5f)
             {
                 if (Settings.HelpMessages)
                 {
-                    Game.DisplayHelp("Press ~y~" + Settings.PickUp.ToString() + "~w~ to pick up the drugs.");
+                    Game.DisplayHelp($"Press ~y~{Settings.PickUp}~w~ to pick up the drugs.");
+                }
+                else
+                {
+                    Settings.HelpMessages = false;
                 }
 
                 if (Game.IsKeyDown(System.Windows.Forms.Keys.E))
                 {
                     isCollected = true;
-                    MainPlayer.Tasks.PlayAnimation(new AnimationDictionary("anim@move_m@trash"), "pickup", -1f, AnimationFlags.UpperBodyOnly);
+                    MainPlayer.Tasks.PlayAnimation(PickupAnim, "pickup", -1f, AnimationFlags.UpperBodyOnly);
                     theDrugs.AttachTo(MainPlayer, 6286, Vector3.RelativeRight, Rotator.Zero);
                     GameFiber.Yield();
                     SafeDelete(theDrugs);
