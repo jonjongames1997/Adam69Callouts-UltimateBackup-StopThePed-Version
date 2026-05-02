@@ -150,12 +150,12 @@ IllegalHuntingBlaineCounty = true
 SpectrumAlertFlorida = true
 LostDog = true
 SoveriegnCitizen = true
-NakedDrugUser = true
+NakedDrugUser = true // This is a beta/test callout. This will not be in the final build.
 TrafficAccident = true
 RoadDebris = true
 DisabledVehicle = true
 TrafficLightOut = true
-ToplessBeachgoer = true
+ToplessBeachgoer = true // This is a beta/test callout. This will not be in the final build.
 
 ------------------------------
 
