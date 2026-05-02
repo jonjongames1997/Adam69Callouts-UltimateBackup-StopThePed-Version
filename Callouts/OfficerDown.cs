@@ -11,6 +11,8 @@ namespace Adam69Callouts.Callouts
 
     public class OfficerDown : Callout
     {
+        // Optimization: Reuse Random instance to avoid allocation overhead
+        private static readonly Random random = new Random();
 
         private static readonly string[] pedsList = new string[] { "s_f_y_cop_01", "s_m_y_cop_01", "csb_cop", "s_f_y_sheriff_01", "s_m_y_sheriff_01", "s_m_y_hwaycop_01", "s_m_m_security_01", "s_f_y_ranger_01", "s_m_y_ranger_01" };
         private static Ped suspect;
@@ -46,8 +48,8 @@ namespace Adam69Callouts.Callouts
             {
                 string missing = DLCManager.GetMissingDLC();
                 Game.DisplayNotification("commonmenu", "mp_alerttriangle", "~r~DLC Missing", "~w~Adam69 Callouts", $"Required DLC '{missing}' is not installed. This callout will not function properly.");
-                Game.LogTrivial("Adam69 Callouts [LOG]: Required DLC '" + missing + "' is not installed. This callout will not function properly.");
-                LoggingManager.Log("Adam69 Callouts [LOG]: Required DLC '" + missing + "' is not installed. This callout will not function properly.");
+                Game.LogTrivial($"Adam69 Callouts [LOG]: Required DLC '{missing}' is not installed. This callout will not function properly.");
+                LoggingManager.Log($"Adam69 Callouts [LOG]: Required DLC '{missing}' is not installed. This callout will not function properly.");
                 return false;
             }
 
@@ -82,34 +84,26 @@ namespace Adam69Callouts.Callouts
 
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("Adam69Callouts_Respond_Code_3_Audio");
 
-            officer = new Ped(pedsList[new Random().Next((int)pedsList.Length)], spawnpoint, 0f);
+            officer = new Ped(pedsList[random.Next(pedsList.Length)], spawnpoint, 0f);
             officer.IsPersistent = true;
             officer.BlockPermanentEvents = true;
             officer.Kill();
-            officer.IsValid();
-            officer.Exists();
 
             NativeFunction.Natives.APPLY_PED_DAMAGE_PACK(officer, "TD_PISTOL_FRONT", 1f, 1f);
 
-            emergencyVehicle = new Vehicle(officerVehicle[new Random().Next((int)officerVehicle.Length)], vehicleSpawn, 0f);
+            emergencyVehicle = new Vehicle(officerVehicle[random.Next(officerVehicle.Length)], vehicleSpawn, 0f);
             emergencyVehicle.IsPersistent = true;
-            emergencyVehicle.IsValid();
-            emergencyVehicle.Exists();
 
             suspect = new Ped(susSpawn);
             suspect.IsPersistent = true;
-            suspect.IsValid();
             suspect.BlockPermanentEvents = true;
-            suspect.Exists();
 
             copBlip = officer.AttachBlip();
             copBlip.Color = System.Drawing.Color.Blue;
             copBlip.IsRouteEnabled = true;
-            copBlip.Exists();
 
             suspectBlip = suspect.AttachBlip();
             suspectBlip.Color = System.Drawing.Color.Red;
-            suspectBlip.Exists();
 
             try
             {
@@ -133,9 +127,9 @@ namespace Adam69Callouts.Callouts
             }
             catch (Exception ex)
             {
-                Game.LogTrivial("Adam69 Callouts [LOG]: Error enabling emergency lights: " + ex.Message);
-                LoggingManager.Log("Adam69 Callouts [LOG]: Error enabling emergency lights: " + ex.Message);
-                LoggingManager.Log("Adam69 Callouts [LOG]: Error enabling emergency lights: " + ex.StackTrace);
+                Game.LogTrivial($"Adam69 Callouts [LOG]: Error enabling emergency lights: {ex.Message}");
+                LoggingManager.Log($"Adam69 Callouts [LOG]: Error enabling emergency lights: {ex.Message}");
+                LoggingManager.Log($"Adam69 Callouts [LOG]: Error enabling emergency lights: {ex.StackTrace}");
                 LoggingManager.Log("Adam69 Callouts [LOG]: Please report this issue on the Adam69 Callouts Discord server: https://discord.gg/N9KgZx4KUn");
             }
 
@@ -168,12 +162,19 @@ namespace Adam69Callouts.Callouts
 
         public override void Process()
         {
-            // Validate officer exists before checking distance
-            if (officer != null && officer.Exists() && officer.IsValid() && MainPlayer.DistanceTo(officer) <= 10f)
+            // Optimization: Cache validation results and distance calculation
+            if (officer == null || !officer.Exists() || !officer.IsValid())
+            {
+                base.Process();
+                return;
+            }
+
+            float distanceToOfficer = MainPlayer.DistanceTo(officer);
+            if (distanceToOfficer <= 10f)
             {
                 if (Settings.HelpMessages)
                 {
-                    Game.DisplayHelp("Press ~y~" + Settings.Dialog.ToString() + "~w~ to Call in a officer down to ~b~dispatch~w~.");
+                    Game.DisplayHelp($"Press ~y~{Settings.Dialog}~w~ to Call in a officer down to ~b~dispatch~w~.");
                 }
                 else
                 {
@@ -199,11 +200,16 @@ namespace Adam69Callouts.Callouts
                                 suspect.Tasks.FollowNavigationMeshToPosition(stripClubPosition, 2.0f, -1);
 
                                 // Wait until suspect is close to the target or until suspect becomes invalid
-                                int waitTicks = 0;
-                                while (suspect != null && suspect.Exists() && suspect.IsValid() && suspect.Position.DistanceTo2D(stripClubPosition) > 3f && waitTicks < 1000)
+                                const int maxWaitTicks = 1000;
+                                for (int waitTicks = 0; waitTicks < maxWaitTicks; waitTicks++)
                                 {
+                                    if (suspect == null || !suspect.Exists() || !suspect.IsValid())
+                                        break;
+
+                                    if (suspect.Position.DistanceTo2D(stripClubPosition) <= 3f)
+                                        break;
+
                                     GameFiber.Yield();
-                                    waitTicks++;
                                 }
 
                                 if (suspect != null && suspect.Exists() && suspect.IsValid())
@@ -228,10 +234,10 @@ namespace Adam69Callouts.Callouts
                             }
                             catch (Exception ex)
                             {
-                                Game.LogTrivial("Adam69 Callouts [LOG]: Error in suspect navigation fiber: " + ex.Message);
+                                Game.LogTrivial($"Adam69 Callouts [LOG]: Error in suspect navigation fiber: {ex.Message}");
                                 if (Settings.EnableLogs)
                                 {
-                                    LoggingManager.Log("Adam69 Callouts [LOG]: Error in suspect navigation fiber: " + ex.Message);
+                                    LoggingManager.Log($"Adam69 Callouts [LOG]: Error in suspect navigation fiber: {ex.Message}");
                                     LoggingManager.Log(ex.StackTrace);
                                 }
                             }
@@ -239,10 +245,10 @@ namespace Adam69Callouts.Callouts
                     }
                     catch (Exception ex)
                     {
-                        Game.LogTrivial("Adam69 Callouts [LOG]: Error while making suspect shoot: " + ex.Message);
+                        Game.LogTrivial($"Adam69 Callouts [LOG]: Error while making suspect shoot: {ex.Message}");
                         if (Settings.EnableLogs)
                         {
-                            LoggingManager.Log("Adam69 Callouts [LOG]: Error while making suspect shoot: " + ex.Message);
+                            LoggingManager.Log($"Adam69 Callouts [LOG]: Error while making suspect shoot: {ex.Message}");
                             LoggingManager.Log(ex.StackTrace);
                         }
                     }
@@ -286,9 +292,9 @@ namespace Adam69Callouts.Callouts
 
                         if (Settings.EnableLogs)
                         {
-                            Game.LogTrivial("Adam69 Callouts [LOG]: " + ex.Message);
-                            LoggingManager.Log("Adam69 Callouts [LOG]: " + ex.Message);
-                            LoggingManager.Log("Adam69 Callouts [LOG]: " + ex.StackTrace);
+                            Game.LogTrivial($"Adam69 Callouts [LOG]: {ex.Message}");
+                            LoggingManager.Log($"Adam69 Callouts [LOG]: {ex.Message}");
+                            LoggingManager.Log($"Adam69 Callouts [LOG]: {ex.StackTrace}");
                         }
                     }
                 }
