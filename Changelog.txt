@@ -8,6 +8,20 @@ v0.4.7
 - Minor Bug Fixes
 - Fixed invalid GTA Models in Illegal Hunting Blaine County Callout with Valid models
 - Minor Bug Fixes and improvements
+- Added new keybinds for backup and K9 unit requests:
+  - RequestCode2BackUp (NumPad1): Request Code 2 backup in certain scenarios
+  - RequestCode3BackUp (NumPad2): Request Code 3 backup in certain scenarios
+  - RequestPanicBackUp (NumPad0): Request panic backup when necessary
+  - RequestK9Unit (NumPad3): Call for K9 unit upon request
+- Improved callout scenario variety with multiple behavior patterns
+- Misc bug fixes and stability improvements
+
+Files updated in this release:
+- `Adam69Callouts.dll` (build)
+- `Adam69Callouts.pdb` (build)
+- `Adam69Callouts.ini` (configuration)
+- `Stuff\Settings.cs` (settings management)
+
 
 Note: Lost Dog callout has returned. May expect bugs.
 
