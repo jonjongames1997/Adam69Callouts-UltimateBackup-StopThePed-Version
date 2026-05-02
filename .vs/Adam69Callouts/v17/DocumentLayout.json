@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\changelog.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:changelog.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|d:\\callout development\\adam69callouts-ultimatebackup-stoptheped-version\\utilities\\configmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:utilities\\configmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\callouts\\officerdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:callouts\\officerdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\callouts\\toplessbeachgoer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:callouts\\toplessbeachgoer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|d:\\callout development\\adam69callouts-ultimatebackup-stoptheped-version\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|d:\\callout development\\adam69callouts-ultimatebackup-stoptheped-version\\callouts\\officerdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|solutionrelative:callouts\\officerdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C330EC03-8BB7-467B-A80A-544D0C7839DE}|Adam69Callouts.csproj|D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\stuff\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,17 +34,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Main.cs",
               "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Main.cs",
               "RelativeDocumentMoniker": "Main.cs",
               "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Main.cs",
               "RelativeToolTip": "Main.cs",
-              "ViewState": "AgIAANIAAAAAAAAAAAAAANUAAABhAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-03T23:29:08.417Z",
               "IsPinned": true,
@@ -78,15 +78,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OfficerDown.cs",
-              "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\OfficerDown.cs",
-              "RelativeDocumentMoniker": "Callouts\\OfficerDown.cs",
-              "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\OfficerDown.cs",
-              "RelativeToolTip": "Callouts\\OfficerDown.cs",
-              "ViewState": "AgIAAFIBAAAAAAAAAAD4vwAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ConfigManager.cs",
+              "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Utilities\\ConfigManager.cs",
+              "RelativeDocumentMoniker": "Utilities\\ConfigManager.cs",
+              "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Utilities\\ConfigManager.cs",
+              "RelativeToolTip": "Utilities\\ConfigManager.cs",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-01T04:39:26.368Z",
+              "WhenOpened": "2026-05-01T23:35:10.928Z",
               "EditorCaption": ""
             },
             {
@@ -112,27 +112,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "OfficerDown.cs",
+              "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\OfficerDown.cs",
+              "RelativeDocumentMoniker": "Callouts\\OfficerDown.cs",
+              "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\OfficerDown.cs",
+              "RelativeToolTip": "Callouts\\OfficerDown.cs",
+              "ViewState": "AgIAAFIBAAAAAAAAAAD4vwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T04:39:26.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ToplessBeachgoer.cs",
               "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\ToplessBeachgoer.cs",
               "RelativeDocumentMoniker": "Callouts\\ToplessBeachgoer.cs",
               "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Callouts\\ToplessBeachgoer.cs",
               "RelativeToolTip": "Callouts\\ToplessBeachgoer.cs",
-              "ViewState": "AgIAAMcCAAAAAAAAAAAIwKQAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAOACAAAAAAAAAAAIwC8BAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:28:22.4Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Changelog.txt",
-              "DocumentMoniker": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Changelog.txt",
-              "RelativeDocumentMoniker": "Changelog.txt",
-              "ToolTip": "D:\\Callout Development\\Adam69Callouts-UltimateBackup-StopThePed-Version\\Changelog.txt",
-              "RelativeToolTip": "Changelog.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-04-11T20:01:01.696Z",
               "EditorCaption": ""
             }
           ]
