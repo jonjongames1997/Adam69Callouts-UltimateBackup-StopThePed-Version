@@ -1,6 +1,8 @@
 ﻿Changelog:
 
-[April 2026]
+[May 2026]
+
+v0.4.7
 
 - Added 4 new callouts
 - Minor Bug Fixes
@@ -11,6 +13,7 @@ Note: Lost Dog callout has returned. May expect bugs.
 
 [March 18, 2026]
 
+v0.4.6
 - Updated LSPDFR API and RAGEPluginHook references to latest version
 - Added 2 new callouts ["Traffic Light Out" and "Spectrum Alert" - Florida Based Callout]
 - Minor Bug Fixes
