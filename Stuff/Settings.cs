@@ -34,7 +34,6 @@ namespace Adam69Callouts
         internal static bool LostDogCallout { get; set; } = true;
         internal static bool SpectrumAlertFlorida { get; set; } = true;
         internal static bool SoveriegnCitizen { get; set; } = true;
-        internal static bool NakedDrugUser { get; set; } = true;
         internal static bool TrafficAccident { get; set; } = true;
         internal static bool RoadDebris { get; set; } = true;
         internal static bool DisabledVehicle { get; set; } = true;
@@ -70,7 +69,6 @@ namespace Adam69Callouts
             Settings.DerangedDrunkenFeller = initializationFile.ReadBoolean("Callouts", "DerangedDrunkenFeller", false);
             Settings.DeadBirdOnTheRoad = initializationFile.ReadBoolean("Callouts", "DeadBirdOnTheRoad", true);
             Settings.KnifeAttack = initializationFile.ReadBoolean("Callouts", "KnifeAttack", true);
-            Settings.NakedDrugUser = initializationFile.ReadBoolean("Callouts", "NakedDrugUser", true);
             Settings.DisabledVehicle = initializationFile.ReadBoolean("Callouts", "DisabledVehicle", true);
             Settings.IllegalHuntingBlaineCounty = initializationFile.ReadBoolean("Callouts", "IllegalHuntingBlaineCounty", true);
             Settings.IndecentExposure = initializationFile.ReadBoolean("Callouts", "IndecentExposure", true);
@@ -153,7 +151,6 @@ namespace Adam69Callouts
             ini.Write("Callouts", "SpectrumAlertFlorida", true);
             ini.Write("Callouts", "LostDog", true);
             ini.Write("Callouts", "SoveriegnCitizen", true);
-            ini.Write("Callouts", "NakedDrugUser", true);
             ini.Write("Callouts", "TrafficAccident", true);
             ini.Write("Callouts", "RoadDebris", true);
             ini.Write("Callouts", "DisabledVehicle", true);
