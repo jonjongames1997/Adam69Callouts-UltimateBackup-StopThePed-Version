@@ -206,7 +206,6 @@ namespace Adam69Callouts
             if (Settings.SpectrumAlertFlorida) { Functions.RegisterCallout(typeof(SpectrumAlertFlorida)); }
             if (Settings.LostDogCallout) { Functions.RegisterCallout(typeof(LostDog)); }
             if (Settings.SoveriegnCitizen) { Functions.RegisterCallout(typeof(SovereignCitizen)); }
-            if (Settings.NakedDrugUser) { Functions.RegisterCallout(typeof(NakedDrugUser)); }
             if (Settings.TrafficAccident) { Functions.RegisterCallout(typeof(TrafficAccident)); }
             if (Settings.RoadDebris) { Functions.RegisterCallout(typeof(RoadDebris)); }
             if (Settings.DisabledVehicle) { Functions.RegisterCallout(typeof(DisabledVehicle)); }
