@@ -97,7 +97,6 @@
     <Compile Include="Callouts\Loitering.cs" />
     <Compile Include="Callouts\LostDog.cs" />
     <Compile Include="Callouts\LSIAAirportIncident.cs" />
-    <Compile Include="Callouts\NakedDrugUser.cs" />
     <Compile Include="Callouts\OfficerDown.cs" />
     <Compile Include="Callouts\PersonCarryingAConcealedWeapon.cs" />
     <Compile Include="Callouts\RoadDebris.cs" />
