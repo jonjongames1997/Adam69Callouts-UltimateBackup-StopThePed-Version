@@ -92,7 +92,7 @@ namespace Adam69Callouts
             RequestCode3BackUp = initializationFile.ReadEnum<Keys>("Keys", "RequestCode3BackUp", Keys.NumPad2);
             RequestPanicBackUp = initializationFile.ReadEnum<Keys>("Keys", "RequestPanicBackUp", Keys.NumPad0);
             RequestK9Unit = initializationFile.ReadEnum<Keys>("Keys", "RequestK9Unit", Keys.NumPad3);
-            ToplessBeachgoer = initializationFile.ReadBoolean("Callouts", "ToplessBeachgoer", true);
+            Settings.ToplessBeachgoer = initializationFile.ReadBoolean("Callouts", "ToplessBeachgoer", true);
 
             // Read traffic settings (as strings then parse to allow safe parsing)
             var radiusStr = initializationFile.ReadString("Traffic", "StopRadius", Settings.TrafficStopRadius.ToString(CultureInfo.InvariantCulture));
